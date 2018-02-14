@@ -50,7 +50,9 @@ def primitive(cls_init):
   """Wraps class __init__ for manipulating its continuation."""
   def __init__(self, *args, **kwargs):
     global _MANIPULATE
-    if '_MANIPULATE' in globals() and callable(_MANIPULATE):
+    # TODO is this okay? i think so; i don't remember where i required the
+    # calllable() check
+    if '_MANIPULATE' in globals():
       _MANIPULATE(cls_init, self, *args, **kwargs)
     else:
       cls_init(self, *args, **kwargs)
